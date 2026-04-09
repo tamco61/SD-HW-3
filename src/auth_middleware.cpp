@@ -5,7 +5,7 @@
 
 namespace blablacar_service {
 
-AuthMiddleware::AuthMiddleware(StorageComponent& storage, bool enabled)
+AuthMiddleware::AuthMiddleware(StoragePgComponent& storage, bool enabled)
     : storage_(storage), enabled_(enabled) {}
 
 void AuthMiddleware::HandleRequest(
@@ -38,7 +38,7 @@ AuthMiddlewareFactory::AuthMiddlewareFactory(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpMiddlewareFactoryBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::unique_ptr<userver::server::middlewares::HttpMiddlewareBase>
 AuthMiddlewareFactory::Create(

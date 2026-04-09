@@ -34,7 +34,7 @@ LoginUserHandler::LoginUserHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string LoginUserHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -60,7 +60,7 @@ CreateUserHandler::CreateUserHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string CreateUserHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -83,7 +83,7 @@ GetUserHandler::GetUserHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string GetUserHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -113,7 +113,7 @@ SearchUsersHandler::SearchUsersHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string SearchUsersHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -142,7 +142,7 @@ CreateRouteHandler::CreateRouteHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string CreateRouteHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -163,7 +163,7 @@ GetRoutesHandler::GetRoutesHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string GetRoutesHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -192,7 +192,7 @@ CreateTripHandler::CreateTripHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string CreateTripHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -212,7 +212,7 @@ AddUserToTripHandler::AddUserToTripHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string AddUserToTripHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,
@@ -234,7 +234,7 @@ GetTripHandler::GetTripHandler(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context)
     : HttpHandlerBase(config, context),
-      storage_(context.FindComponent<StorageComponent>()) {}
+      storage_(context.FindComponent<StoragePgComponent>()) {}
 
 std::string GetTripHandler::HandleRequestThrow(
     const userver::server::http::HttpRequest& request,

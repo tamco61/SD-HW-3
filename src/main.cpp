@@ -4,12 +4,13 @@
 #include <userver/clients/dns/component.hpp>
 #include <userver/server/handlers/ping.hpp>
 #include <userver/server/handlers/tests_control.hpp>
+#include <userver/storages/postgres/component.hpp>
 #include <userver/testsuite/testsuite_support.hpp>
 #include <userver/utils/daemon_run.hpp>
 
 #include "auth_middleware.hpp"
 #include "handlers/api_handlers.hpp"
-#include "storage.hpp"
+#include "storage_pg.hpp"
 
 
 int main(int argc, char* argv[]) {
@@ -21,9 +22,10 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::HttpClient>()
           .Append<userver::clients::http::MiddlewarePipelineComponent>()
           .Append<userver::server::handlers::TestsControl>()
-          .Append<userver::clients::dns::Component>();
+          .Append<userver::clients::dns::Component>()
+          .Append<userver::components::Postgres>("postgres-db");
 
-  blablacar_service::AppendStorage(component_list);
+  blablacar_service::AppendStoragePg(component_list);
   blablacar_service::AppendApiHandlers(component_list);
   blablacar_service::AppendAuthMiddleware(component_list);
 

@@ -3,7 +3,7 @@
 #include <string_view>
 #include <userver/components/component_list.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
-#include "../storage.hpp"
+#include "../storage_pg.hpp"
 
 namespace blablacar_service {
 
@@ -18,7 +18,7 @@ class LoginUserHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class CreateUserHandler final
@@ -32,7 +32,7 @@ class CreateUserHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class GetUserHandler final : public userver::server::handlers::HttpHandlerBase {
@@ -45,7 +45,7 @@ class GetUserHandler final : public userver::server::handlers::HttpHandlerBase {
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class SearchUsersHandler final
@@ -59,7 +59,7 @@ class SearchUsersHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class CreateRouteHandler final
@@ -73,7 +73,7 @@ class CreateRouteHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class GetRoutesHandler final
@@ -87,7 +87,7 @@ class GetRoutesHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class CreateTripHandler final
@@ -101,7 +101,7 @@ class CreateTripHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class AddUserToTripHandler final
@@ -115,7 +115,7 @@ class AddUserToTripHandler final
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 class GetTripHandler final : public userver::server::handlers::HttpHandlerBase {
@@ -128,7 +128,7 @@ class GetTripHandler final : public userver::server::handlers::HttpHandlerBase {
       userver::server::request::RequestContext&) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 void AppendApiHandlers(userver::components::ComponentList& component_list);

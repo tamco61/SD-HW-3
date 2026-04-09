@@ -3,7 +3,7 @@
 #include <userver/components/component_list.hpp>
 #include <userver/server/middlewares/http_middleware_base.hpp>
 #include <userver/yaml_config/yaml_config.hpp>
-#include "storage.hpp"
+#include "storage_pg.hpp"
 
 namespace blablacar_service {
 
@@ -12,14 +12,14 @@ class AuthMiddleware final
  public:
   static constexpr std::string_view kName = "auth-middleware";
 
-  explicit AuthMiddleware(StorageComponent& storage, bool enabled);
+  explicit AuthMiddleware(StoragePgComponent& storage, bool enabled);
 
   void HandleRequest(
       userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext& context) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
   bool enabled_;
 };
 
@@ -36,7 +36,7 @@ class AuthMiddlewareFactory final
       userver::yaml_config::YamlConfig middleware_config) const override;
 
  private:
-  StorageComponent& storage_;
+  StoragePgComponent& storage_;
 };
 
 void AppendAuthMiddleware(userver::components::ComponentList& component_list);
