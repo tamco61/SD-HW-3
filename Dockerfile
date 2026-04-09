@@ -1,4 +1,4 @@
-FROM ghcr.io/userver-framework/ubuntu-22.04-userver-pg-dev:latest
+FROM ghcr.io/userver-framework/ubuntu-24.04-userver:latest
 
 WORKDIR /app
 COPY . .

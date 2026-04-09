@@ -4,7 +4,8 @@ project(blablacar_service CXX)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(DownloadUserver)
 
-find_package(userver COMPONENTS core QUIET)
+set(USERVER_FEATURE_POSTGRESQL ON CACHE BOOL "" FORCE)
+find_package(userver COMPONENTS core postgresql QUIET)
 if(NOT userver_FOUND)
   # Tries TRY_DIR first, falls back to downloading userver from GitHub using CPM.
   download_userver(TRY_DIR third_party/userver VERSION 2.8)
@@ -12,18 +13,32 @@ endif()
 
 userver_setup_environment()
 
+# Force Clang to use GCC 11 toolchain for proper C++20 coroutine support
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-toolchain=/usr")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --gcc-toolchain=/usr")
+endif()
+
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
     src/handlers/api_handlers.cpp
     src/handlers/api_handlers.hpp
-    src/storage.cpp
-    src/storage.hpp
+    src/storage_pg.cpp
+    src/storage_pg.hpp
     src/models.hpp
     src/auth_middleware.hpp
     src/auth_middleware.cpp
 )
-target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::core)
+target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::core userver::postgresql)
+
+# Force include GCC 11 headers for coroutine support with Clang
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  target_include_directories(${PROJECT_NAME}_objs SYSTEM BEFORE PRIVATE
+    /usr/include/c++/11
+    /usr/include/x86_64-linux-gnu/c++/11
+  )
+endif()
 
 
 # The Service
